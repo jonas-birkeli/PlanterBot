@@ -1,16 +1,32 @@
-# This is a sample Python script.
+#!/usr/bin/env pybricks-micropython
+import sys
+from pybricks.hubs import EV3Brick
+from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor, InfraredSensor, UltrasonicSensor, GyroSensor)
+from pybricks.parameters import Port, Stop, Direction, Button, Color
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.robotics import DriveBase
+from pybricks.media.ev3dev import SoundFile, ImageFile
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+ev3 = EV3Brick()
+left_motor = Motor(Port.A)
+right_motor = Motor(Port.B)
+middle_motor = Motor(Port.C)
+robot = DriveBase(left_motor, right_motor, 56, 114)
+
+light_sensor = ColorSensor(Port.S1)
+touch_sensor = TouchSensor(Port.S2)
+ultrasonic_sensor = UltrasonicSensor(Port.S3)
+gyro_sensor = GyroSensor(Port.S4)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def main():
+	# MAIN LOOP
+	while True:
+		pass
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+if __name__ == "__main__":
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+	main()
+	sys.exit(0)
