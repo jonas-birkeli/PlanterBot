@@ -1,5 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 import sys
+import time
+
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor, InfraredSensor, UltrasonicSensor, GyroSensor)
 from pybricks.parameters import Port, Stop, Direction, Button, Color
@@ -19,14 +21,41 @@ ultrasonic_sensor = UltrasonicSensor(Port.S3)
 gyro_sensor = GyroSensor(Port.S4)
 
 
+DRIVESPEED = 100
+
+
+def turn(radius: float, speed: float = 100):
+	turn_rate = speed / radius
+	robot.drive(speed, turn_rate)
+
+
+def end_turn():
+	robot.stop()
+
+
+def plant(plant_speed: float = 100):
+	middle_motor.run(plant_speed)
+
+
+def stop_planting():
+	middle_motor.stop()
+
+
 def main():
 	# MAIN LOOP
-	while True:
-		pass
+	plant()
+	for n in range(4):  # We want to make the robot drive in a square and drive left and right
+		robot.drive(DRIVESPEED, 0)
+
+		if n % 2 == 0:
+			turn(50, DRIVESPEED)
+		else:
+			turn(-50, DRIVESPEED)
+		time.sleep(1)
+		robot.stop()  # End turn
+	stop_planting()
 
 
 if __name__ == "__main__":
-
-
 	main()
 	sys.exit(0)
