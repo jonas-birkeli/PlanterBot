@@ -10,15 +10,17 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
 ev3 = EV3Brick()
-left_motor = Motor(Port.A)
+left_motor = Motor(Port.C)
 right_motor = Motor(Port.B)
-middle_motor = Motor(Port.C)
+middle_motor = Motor(Port.A)
 robot = DriveBase(left_motor, right_motor, 56, 114)
 
+"""
 light_sensor = ColorSensor(Port.S1)
 touch_sensor = TouchSensor(Port.S2)
 ultrasonic_sensor = UltrasonicSensor(Port.S3)
 gyro_sensor = GyroSensor(Port.S4)
+"""
 
 
 DRIVESPEED = 100
@@ -44,15 +46,20 @@ def stop_planting():
 def main():
 	# MAIN LOOP
 	plant()
-	for n in range(4):  # We want to make the robot drive in a square and drive left and right
+	for n in range(6):  # We want to make the robot drive in a square and drive left and right
 		robot.drive(DRIVESPEED, 0)
 
+		time.sleep(10)
+		robot.stop()
+  
 		if n % 2 == 0:
-			turn(50, DRIVESPEED)
+			turn(1, DRIVESPEED)
 		else:
-			turn(-50, DRIVESPEED)
-		time.sleep(1)
+			turn(-1, DRIVESPEED)
+   
+		time.sleep(4)
 		robot.stop()  # End turn
+  
 	stop_planting()
 
 
