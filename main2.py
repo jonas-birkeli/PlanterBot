@@ -23,7 +23,7 @@ LINES = 4
 
 
 class Robot:
-	def __init__(self, drive_base: DriveBase, middle_motor: Motor, gyro_sensor: GyroSensor):
+	def __init__(self, drive_base: DriveBase, middle_motor: Motor, gyro_sensor: GyroSensor) -> None:
 		self.drive_base = drive_base
 		self.middle_motor = middle_motor
 		self.gyro_sensor = gyro_sensor
@@ -41,14 +41,24 @@ class Robot:
 		)
 		self.drive_base.stop()
 
-	def start(self):
+	def start(self) -> None:
 		self.middle_motor.run(100)  # Start planting
 
 		for n in range(LINES):  # We want to make the robot drive in a square by driving up and down
 			self.__drive_and_turn(1000, 5, (n % 2)*2 - 1)
 			# (n % 2)*2 - 1 is a fancy way of saying -1 if n is odd, 1 if n is even
 
-	def __drive_and_turn(self, distance: float, radius: float = 1, direction: int = 1):
+		self.middle_motor.stop()  # Stop planting
+
+	def __drive_and_turn(self, distance: float, radius: float = 1, direction: int = 1) -> None:
+		"""
+		Drives the robot in a straight line for a given distance, then turns it in a circle of a given radius for 180 degrees
+
+		:param distance: Distance of the robot in a straight line
+		:param radius: Radius of the circle the robot will turn in
+		:param direction: Direction of the circle the robot will turn in
+		:return: None
+		"""
 		self.drive_base.straight(distance)
 
 		while True:
