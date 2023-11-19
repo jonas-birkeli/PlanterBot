@@ -22,7 +22,6 @@ ultrasonic_sensor = UltrasonicSensor(Port.S3)
 gyro_sensor = GyroSensor(Port.S4)
 """
 
-
 DRIVESPEED = 100
 
 
@@ -51,15 +50,15 @@ def main():
 
 		time.sleep(10)
 		robot.stop()
-  
+
 		if n % 2 == 0:
 			turn(1, DRIVESPEED)
 		else:
 			turn(-1, DRIVESPEED)
-   
+
 		time.sleep(4)
 		robot.stop()  # End turn
-  
+
 	stop_planting()
 
 
